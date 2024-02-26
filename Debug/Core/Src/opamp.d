@@ -29,7 +29,9 @@ Core/Src/opamp.o: ../Core/Src/opamp.c ../Core/Inc/opamp.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_opamp.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_opamp_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr.h \
- ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h
 ../Core/Inc/opamp.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:
@@ -63,3 +65,5 @@ Core/Src/opamp.o: ../Core/Src/opamp.c ../Core/Inc/opamp.h \
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_opamp_ex.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h:

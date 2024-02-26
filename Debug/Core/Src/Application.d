@@ -34,6 +34,8 @@ Core/Src/Application.o: ../Core/Src/Application.c \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_opamp_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h \
  ../Core/Inc/adc.h ../Core/Inc/CAN_Handler.h \
  ../Drivers/CAN_LIB/inc/CAN_LIB.h \
  ../Drivers/CAN_LIB/inc/CAN_value_types.h
@@ -74,6 +76,8 @@ Core/Src/Application.o: ../Core/Src/Application.c \
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_opamp_ex.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h:
 ../Core/Inc/adc.h:
 ../Core/Inc/CAN_Handler.h:
 ../Drivers/CAN_LIB/inc/CAN_LIB.h:

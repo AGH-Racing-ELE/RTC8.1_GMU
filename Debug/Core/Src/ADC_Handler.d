@@ -33,6 +33,8 @@ Core/Src/ADC_Handler.o: ../Core/Src/ADC_Handler.c \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_opamp_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h \
  ../Core/Inc/adc.h
 ../Core/Inc/ADC_Handler.h:
 ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h:
@@ -69,4 +71,6 @@ Core/Src/ADC_Handler.o: ../Core/Src/ADC_Handler.c \
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_opamp_ex.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h:
 ../Core/Inc/adc.h:

@@ -7,6 +7,7 @@
 
 #include "Application.h"
 
+
 Gearbox_t gearbox;
 
 void AppInit(void)
@@ -14,6 +15,7 @@ void AppInit(void)
 	gearboxInit(&gearbox);
 	ADC_Init();
 	CAN_Handler_Init();
+
 }
 
 void canRxProcess()
@@ -55,5 +57,28 @@ void statusLED(void)
 {
 	HAL_GPIO_TogglePin(STATUS_LED_GPIO_Port, STATUS_LED_Pin);
 }
-
+void AppProcess(void)
+{
+	static uint8_t CANRXtick = HAL_GetTick();
+	static uint8_t CANSendFrameTick = HAL_GetTick();
+	static uint8_t StatusLEDTick = HAL_GetTick();
+	while(1)
+	{
+		if((HAL_GetTick() - CANRXtick) > 1)
+		{
+			canRxProcess();
+			CANRXtick = HAL_GetTick();
+		}
+		if((HAL_GetTick() - CANSendFrameTick) > 2)
+		{
+			canRxProcess();
+			CANSendFrameTick = HAL_GetTick();
+		}
+		if((HAL_GetTick() - StatusLEDTick) > 1000)
+		{
+			canRxProcess();
+			StatusLEDTick = HAL_GetTick();
+		}
+	}
+}
 

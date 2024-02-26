@@ -92,11 +92,8 @@ int main(void)
   MX_CAN_Init();
   MX_OPAMP1_Init();
   MX_ADC1_Init();
-  MX_OPAMP2_Init();
-  MX_ADC2_Init();
-  MX_OPAMP3_Init();
-  MX_ADC3_Init();
   /* USER CODE BEGIN 2 */
+//2ms
 
   /* USER CODE END 2 */
 

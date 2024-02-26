@@ -34,6 +34,8 @@ Drivers/CAN_LIB/src/CAN_LIB.o: ../Drivers/CAN_LIB/src/CAN_LIB.c \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_opamp_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h \
  ../Drivers/CAN_LIB/inc/CAN_FIFO.h
 ../Drivers/CAN_LIB/inc/CAN_LIB.h:
 ../Drivers/CAN_LIB/inc/CAN_value_types.h:
@@ -72,4 +74,6 @@ Drivers/CAN_LIB/src/CAN_LIB.o: ../Drivers/CAN_LIB/src/CAN_LIB.c \
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_opamp_ex.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h:
 ../Drivers/CAN_LIB/inc/CAN_FIFO.h:
