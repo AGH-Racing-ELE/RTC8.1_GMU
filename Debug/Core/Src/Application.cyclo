@@ -1,0 +1,4 @@
+../Core/Src/Application.c:12:6:AppInit	1
+../Core/Src/Application.c:19:6:canRxProcess	6
+../Core/Src/Application.c:48:6:sendCANFrame	1
+../Core/Src/Application.c:54:6:statusLED	1

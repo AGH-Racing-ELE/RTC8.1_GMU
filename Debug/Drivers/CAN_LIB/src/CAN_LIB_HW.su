@@ -1,0 +1,8 @@
+../Drivers/CAN_LIB/src/CAN_LIB_HW.c:5:6:CAN_HW_Init	8	static
+../Drivers/CAN_LIB/src/CAN_LIB_HW.c:39:17:CAN_HW_GetTickMs	8	static
+../Drivers/CAN_LIB/src/CAN_LIB_HW.c:43:9:CAN_HW_SendFrame	16	static
+../Drivers/CAN_LIB/src/CAN_LIB_HW.c:76:6:HAL_CAN_TxMailbox0CompleteCallback	16	static
+../Drivers/CAN_LIB/src/CAN_LIB_HW.c:81:6:HAL_CAN_TxMailbox0AbortCallback	16	static
+../Drivers/CAN_LIB/src/CAN_LIB_HW.c:86:6:HAL_CAN_RxFifo0MsgPendingCallback	16	static
+../Drivers/CAN_LIB/src/CAN_LIB_HW.c:96:6:HAL_CAN_RxFifo0FullCallback	16	static
+../Drivers/CAN_LIB/src/CAN_LIB_HW.c:100:6:HAL_CAN_ErrorCallback	16	static

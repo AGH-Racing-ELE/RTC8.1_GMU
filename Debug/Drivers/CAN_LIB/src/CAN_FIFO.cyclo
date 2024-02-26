@@ -1,0 +1,4 @@
+../Drivers/CAN_LIB/src/CAN_FIFO.c:12:6:CAN_FIFO_Add	3
+../Drivers/CAN_LIB/src/CAN_FIFO.c:29:10:CAN_FIFO_Get	3
+../Drivers/CAN_LIB/src/CAN_FIFO.c:45:9:CAN_FIFO_Empty	1
+../Drivers/CAN_LIB/src/CAN_FIFO.c:50:6:CAN_FIFO_Flush	1
