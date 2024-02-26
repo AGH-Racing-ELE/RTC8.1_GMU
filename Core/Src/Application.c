@@ -59,9 +59,10 @@ void statusLED(void)
 }
 void AppProcess(void)
 {
-	static uint8_t CANRXtick = HAL_GetTick();
-	static uint8_t CANSendFrameTick = HAL_GetTick();
-	static uint8_t StatusLEDTick = HAL_GetTick();
+	uint8_t CANRXtick = HAL_GetTick();
+	uint8_t CANSendFrameTick = HAL_GetTick();
+	uint8_t StatusLEDTick = HAL_GetTick();
+
 	while(1)
 	{
 		if((HAL_GetTick() - CANRXtick) > 1)
