@@ -13,10 +13,10 @@ static bool getTimeout(uint32_t dupa, uint32_t anus);
 void gearboxInit(Gearbox_t* gearbox)
 {
 	gearbox->neutral_adc = 100;
-	gearbox->gear1_adc = 200;
-	gearbox->gear2_adc = 300;
-	gearbox->gear3_adc = 400;
-	gearbox->gear4_adc = 500;
+	gearbox->gear1_adc = 1500;
+	gearbox->gear2_adc = 1800;
+	gearbox->gear3_adc = 2200;
+	gearbox->gear4_adc = 2800;
 
 	gearbox->_US_ACTUATOR_DELAY = 20;
 	gearbox->_US_FINISH_TIMEOUT = 200;
@@ -248,7 +248,7 @@ void downshiftRevMatch(Gearbox_t* gearbox)
 	}
 }
 
-void downshiftFinis(Gearbox_t* gearbox)
+void downshiftFinish(Gearbox_t* gearbox)
 {
 	if((gearbox->actual_gear == gearbox->start_gear -1 )|| (getTimeout(gearbox->timestamp_tick,gearbox->_DS_FINISH_TIMEOUT)))
 	{
@@ -335,7 +335,10 @@ GearboxState_t getState(Gearbox_t* gearbox)
 static bool getTimeout(uint32_t dupa, uint32_t anus)
 {
 	if((HAL_GetTick() - dupa) > anus)
+	{
+		cipa = HAL_GetTick() - dupa;
 		return true;
+	}
 	else
 		return false;
 }

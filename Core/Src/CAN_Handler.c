@@ -42,7 +42,7 @@ uint8_t CAN_Handler_IsGearDownCommanded(){
 
 	static uint32_t last_tick = 0;
 
-	if(cf_gear_down.tick_ms != last_tick && cf_gear_down.core.data[0] == 255){
+	if(cf_gear_up.tick_ms != last_tick && cf_gear_down.core.data[0] == 255){
 		last_tick = cf_gear_down.tick_ms;
 		return 1;
 	}

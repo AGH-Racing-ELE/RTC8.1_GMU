@@ -20,7 +20,7 @@ void AppInit(void)
 
 void canRxProcess()
 {
-	uint8_t clutch_data;
+	static uint8_t clutch_data;
 
 	if(CAN_Handler_IsGearUpCommanded())
 	{
@@ -49,8 +49,9 @@ void canRxProcess()
 
 void sendCANFrame(void)
 {
-	CAN_Handler_SendGmu1Frame(getGear(&gearbox), 0, getADCValue(), (uint8_t)getState(&gearbox),0, 0,getGearCut(&gearbox));
-	CAN_Handler_SendGmu2Frame(0, 0, 0, 0);
+
+	CAN_Handler_SendGmu1Frame(13, 15, getADCValue(), (uint8_t)getState(&gearbox),0, 0,getGearCut(&gearbox));
+	CAN_Handler_SendGmu2Frame(1, 2, 3, 4);
 }
 
 void statusLED(void)
@@ -59,12 +60,16 @@ void statusLED(void)
 }
 void AppProcess(void)
 {
-	uint8_t CANRXtick = HAL_GetTick();
-	uint8_t CANSendFrameTick = HAL_GetTick();
-	uint8_t StatusLEDTick = HAL_GetTick();
+	uint32_t CANRXtick = HAL_GetTick();
+	uint32_t CANSendFrameTick = HAL_GetTick();
+	uint32_t StatusLEDTick = HAL_GetTick();
 
 	while(1)
 	{
+		gearbox.gearPosADC = getADCValue();
+		updateGear(&gearbox);
+		processCallback(&gearbox);
+
 		if((HAL_GetTick() - CANRXtick) > 1)
 		{
 			canRxProcess();
@@ -72,12 +77,12 @@ void AppProcess(void)
 		}
 		if((HAL_GetTick() - CANSendFrameTick) > 2)
 		{
-			canRxProcess();
+			sendCANFrame();
 			CANSendFrameTick = HAL_GetTick();
 		}
 		if((HAL_GetTick() - StatusLEDTick) > 1000)
 		{
-			canRxProcess();
+			statusLED();
 			StatusLEDTick = HAL_GetTick();
 		}
 	}

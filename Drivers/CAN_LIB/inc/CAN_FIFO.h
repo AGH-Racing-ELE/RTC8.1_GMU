@@ -10,7 +10,7 @@
 #define CAN_FIFO_H_
 
 #include <sys/_stdint.h>
-#define CAN_FIFO_SIZE 10
+#define CAN_FIFO_SIZE 100
 
 struct CAN_FIFO{
 
