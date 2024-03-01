@@ -1,6 +1,7 @@
 ../Core/Src/CAN_Handler.c:14:6:CAN_Handler_Init	1
-../Core/Src/CAN_Handler.c:26:9:CAN_Handler_IsGearUpCommanded	3
-../Core/Src/CAN_Handler.c:41:9:CAN_Handler_IsGearDownCommanded	3
-../Core/Src/CAN_Handler.c:56:9:CAN_Handler_IsClutchCommanded	2
-../Core/Src/CAN_Handler.c:72:6:CAN_Handler_SendGmu1Frame	1
-../Core/Src/CAN_Handler.c:86:6:CAN_Handler_SendGmu2Frame	1
+../Core/Src/CAN_Handler.c:27:9:CAN_Handler_IsGearUpCommanded	3
+../Core/Src/CAN_Handler.c:42:9:CAN_Handler_IsGearDownCommanded	3
+../Core/Src/CAN_Handler.c:57:9:CAN_Handler_IsClutchCommanded	2
+../Core/Src/CAN_Handler.c:73:9:CAN_Handler_IsAutoshiftCommanded	2
+../Core/Src/CAN_Handler.c:86:6:CAN_Handler_SendGmu1Frame	1
+../Core/Src/CAN_Handler.c:100:6:CAN_Handler_SendGmu2Frame	1

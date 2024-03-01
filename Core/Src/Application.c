@@ -9,40 +9,45 @@
 
 
 Gearbox_t gearbox;
+static uint8_t clutch_data;
 
 void AppInit(void)
 {
 	gearboxInit(&gearbox);
 	ADC_Init();
 	CAN_Handler_Init();
-
 }
 
 void canRxProcess()
 {
-	static uint8_t clutch_data;
-
 	if(CAN_Handler_IsGearUpCommanded())
 	{
+		disableAutoshift(&gearbox);
 		startUpshift(&gearbox);
 		return;
 	}
 	if(CAN_Handler_IsGearDownCommanded())
 	{
+		disableAutoshift(&gearbox);
 		startDownshift(&gearbox);
 		return;
 	}
 	if(CAN_Handler_IsClutchCommanded(&clutch_data))
 	{
 		if(clutch_data == 255)
-			{
-				clutch(true);
-			}
-			else if(clutch_data == 0)
-			{
-				clutch(false);
-			}
-				return;
+		{
+			clutch(true);
+		}
+		else if(clutch_data == 0)
+		{
+			clutch(false);
+		}
+		return;
+	}
+	if(CAN_Handler_IsAutoshiftCommanded())
+	{
+		enableAutoshift(&gearbox);
+		return;
 	}
 
 }
@@ -50,7 +55,7 @@ void canRxProcess()
 void sendCANFrame(void)
 {
 
-	CAN_Handler_SendGmu1Frame(13, 15, getADCValue(), (uint8_t)getState(&gearbox),0, 0,getGearCut(&gearbox));
+	CAN_Handler_SendGmu1Frame(gearbox.actual_gear, clutch_data, gearbox.gearPosADC, gearbox._state, 0, 0, gearbox.gear_cut);
 	CAN_Handler_SendGmu2Frame(1, 2, 3, 4);
 }
 
@@ -66,10 +71,13 @@ void AppProcess(void)
 
 	while(1)
 	{
-		gearbox.gearPosADC = getADCValue();
+
 		updateGear(&gearbox);
 		processCallback(&gearbox);
-
+		if(gearbox._autoshiftState == AutoshiftEnable)
+		{
+			autoshiftProcess(&gearbox);
+		}
 		if((HAL_GetTick() - CANRXtick) > 1)
 		{
 			canRxProcess();
@@ -85,6 +93,7 @@ void AppProcess(void)
 			statusLED();
 			StatusLEDTick = HAL_GetTick();
 		}
+
 	}
 }
 

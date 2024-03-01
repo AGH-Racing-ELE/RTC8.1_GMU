@@ -1,9 +1,5 @@
 Core/Src/Gearbox.o: ../Core/Src/Gearbox.c ../Core/Inc/Gearbox.h \
- ../Core/Inc/main.h ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h \
- ../Core/Inc/stm32f3xx_hal_conf.h \
- ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h \
- ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h \
- ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f3xx.h \
+ ../Core/Inc/ADC_Handler.h \
  ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h \
  ../Drivers/CMSIS/Include/core_cm4.h \
  ../Drivers/CMSIS/Include/cmsis_version.h \
@@ -11,6 +7,13 @@ Core/Src/Gearbox.o: ../Core/Src/Gearbox.c ../Core/Inc/Gearbox.h \
  ../Drivers/CMSIS/Include/cmsis_gcc.h \
  ../Drivers/CMSIS/Include/mpu_armv7.h \
  ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/system_stm32f3xx.h \
+ ../Core/Inc/opamp.h ../Core/Inc/main.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h \
+ ../Core/Inc/stm32f3xx_hal_conf.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h \
+ ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f3xx.h \
+ ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_gpio.h \
@@ -31,14 +34,10 @@ Core/Src/Gearbox.o: ../Core/Src/Gearbox.c ../Core/Inc/Gearbox.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h \
- ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h \
+ ../Core/Inc/adc.h ../Core/Inc/main.h
 ../Core/Inc/Gearbox.h:
-../Core/Inc/main.h:
-../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:
-../Core/Inc/stm32f3xx_hal_conf.h:
-../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h:
-../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h:
-../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f3xx.h:
+../Core/Inc/ADC_Handler.h:
 ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h:
 ../Drivers/CMSIS/Include/core_cm4.h:
 ../Drivers/CMSIS/Include/cmsis_version.h:
@@ -46,6 +45,14 @@ Core/Src/Gearbox.o: ../Core/Src/Gearbox.c ../Core/Inc/Gearbox.h \
 ../Drivers/CMSIS/Include/cmsis_gcc.h:
 ../Drivers/CMSIS/Include/mpu_armv7.h:
 ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/system_stm32f3xx.h:
+../Core/Inc/opamp.h:
+../Core/Inc/main.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:
+../Core/Inc/stm32f3xx_hal_conf.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h:
+../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f3xx.h:
+../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xc.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc_ex.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_gpio.h:
@@ -67,3 +74,5 @@ Core/Src/Gearbox.o: ../Core/Src/Gearbox.c ../Core/Inc/Gearbox.h \
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h:
+../Core/Inc/adc.h:
+../Core/Inc/main.h:

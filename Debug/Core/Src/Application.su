@@ -1,5 +1,5 @@
-../Core/Src/Application.c:13:6:AppInit	8	static
+../Core/Src/Application.c:14:6:AppInit	8	static
 ../Core/Src/Application.c:21:6:canRxProcess	8	static
-../Core/Src/Application.c:50:6:sendCANFrame	32	static
-../Core/Src/Application.c:57:6:statusLED	8	static
-../Core/Src/Application.c:61:6:AppProcess	24	static
+../Core/Src/Application.c:55:6:sendCANFrame	32	static
+../Core/Src/Application.c:62:6:statusLED	8	static
+../Core/Src/Application.c:66:6:AppProcess	24	static

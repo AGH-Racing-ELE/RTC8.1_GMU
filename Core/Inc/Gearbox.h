@@ -8,6 +8,14 @@
 #ifndef GEARBOX_H_
 #define GEARBOX_H_
 
+#define US_ACTUATOR_DELAY 20
+#define US_FINISH_TIMEOUT 200
+#define DS_ACTUATOR_DELAY 40
+#define DS_FINISH_TIMEOUT 250
+#define OL_US_GEARCUT_DELAY 100
+#define OL_DS_CLUTCH_DELAY 100
+#define SHIFT_RPM 5000
+
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -29,6 +37,12 @@ typedef enum
 	OL_DS_Finish
 }GearboxState_t;
 
+typedef enum
+{
+	AutoshiftEnable,
+	AutoshiftDisable
+}AutoshiftState_t;
+
 typedef struct
 {
 	uint16_t gearPosADC;
@@ -37,7 +51,6 @@ typedef struct
 	uint16_t gear2_adc;
 	uint16_t gear3_adc;
 	uint16_t gear4_adc;
-
 	//const uint16_t _G_MAP[10];
 
 	uint16_t _US_ACTUATOR_DELAY; //previous 20
@@ -51,6 +64,7 @@ typedef struct
 	uint16_t _OL_DS_CLUTCH_DELAY;
 
 	GearboxState_t _state;
+	AutoshiftState_t _autoshiftState;
 
 	uint8_t  actual_gear;
 	uint32_t shift_start_tick;
@@ -59,6 +73,7 @@ typedef struct
 	uint8_t start_gear;
 
 	uint8_t gear_cut;
+	uint16_t actualRPM;
 
 }Gearbox_t;
 
@@ -66,8 +81,6 @@ typedef struct
 
 	void updateGearADC(Gearbox_t* gearbox, uint16_t ADCValue);
 	void updateGear(Gearbox_t* gearbox);
-	uint8_t getGear(Gearbox_t* gerbox);
-	uint8_t getGearCut(Gearbox_t* gerbox);
 
 	void processCallback(Gearbox_t* gearbox);
 	void startUpshiftCallback(Gearbox_t* gearbox);
@@ -89,16 +102,14 @@ typedef struct
 	void startUpshift(Gearbox_t* gearbox);
 	void startDownshift(Gearbox_t* gearbox);
 
-
-//	void openLoopUpshift(void);
-//	void openLoopDownshift(void);
-//
-//	void closedLoopUpshift(void);
-//	void closedLoopDownshift(void);
 	void clutch(bool ON);
 
 	GearboxState_t getState(Gearbox_t* gearbox);
 	bool isShiftinProgress(Gearbox_t*gearbox);
 
+	AutoshiftState_t getAutoshiftState(Gearbox_t* gearbox);
+	void enableAutoshift(Gearbox_t* gearbox);
+	void disableAutoshift(Gearbox_t* gearbox);
+	void autoshiftProcess(Gearbox_t* gearbox);
 
 #endif /* INC_GEARBOX_H_ */

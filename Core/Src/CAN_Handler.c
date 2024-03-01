@@ -7,7 +7,7 @@
 #include <CAN_Handler.h>
 #include "CAN_LIB.h"
 
-struct can_frame cf_gear_up, cf_gear_down, cf_clutch;
+struct can_frame cf_gear_up, cf_gear_down,cf_clutch, cf_autoshift;
 struct can_frame cf_gmu1, cf_gmu2;
 
 
@@ -18,6 +18,8 @@ void CAN_Handler_Init(){
 	CAN_InitFrame(&cf_gear_up, 0x000, 0, 1);
 	CAN_InitFrame(&cf_gear_down, 0x001, 0, 1);
 	CAN_InitFrame(&cf_clutch, 0x002, 0, 1);
+	CAN_InitFrame(&cf_autoshift, 0x003, 0, 1);
+	CAN_InitFrame(&cf_rpm, 0x010, 0, 1);
 	CAN_InitFrame(&cf_gmu1, 0x080, 10, 8);
 	CAN_InitFrame(&cf_gmu2, 0x081, 100, 8);
 
@@ -67,6 +69,19 @@ uint8_t CAN_Handler_IsClutchCommanded(uint8_t* data){
 	}
 
 
+}
+
+uint8_t CAN_Handler_IsAutoshiftCommanded()
+{
+	static uint32_t last_tick = 0;
+
+	if((cf_autoshift.tick_ms != last_tick) && cf_autoshift.core.data[0] == 255)
+	{
+		last_tick = cf_autoshift.tick_ms;
+		return 1;
+	}
+	else
+		return 0;
 }
 
 void CAN_Handler_SendGmu1Frame(uint8_t gear, uint8_t clutch, uint16_t gear_pos_adc, uint8_t state, uint8_t air_preas, uint8_t reset_det, uint8_t gear_cut){
