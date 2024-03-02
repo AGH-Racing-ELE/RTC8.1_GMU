@@ -50,8 +50,8 @@ void canRxProcess()
 void sendCANFrame(void)
 {
 
-	CAN_Handler_SendGmu1Frame(13, 15, getADCValue(), (uint8_t)getState(&gearbox),0, 0,getGearCut(&gearbox));
-	CAN_Handler_SendGmu2Frame(1, 2, 3, 4);
+	CAN_Handler_SendGmu1Frame(gearbox.actual_gear, HAL_GPIO_ReadPin(CLUTCH_GPIO_Port, CLUTCH_Pin), gearbox.gearPosADC, gearbox._state, 0, 0, gearbox.gear_cut);
+	CAN_Handler_SendGmu2Frame(0, 0, gearbox.upshiftTime, gearbox.downshiftTime);
 }
 
 void statusLED(void)

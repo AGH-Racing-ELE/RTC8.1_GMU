@@ -11,6 +11,12 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#define US_ACTUATOR_DELAY 20
+#define US_FINISH_TIMEOUT 200
+#define DS_ACTUATOR_DELAY 40
+#define DS_FINISH_TIMEOUT 250
+#define OL_US_GEARCUT_DEALAY 100
+#define OL_DS_CLUTCH_DELAY 100
 
 typedef enum
 {
@@ -38,18 +44,6 @@ typedef struct
 	uint16_t gear3_adc;
 	uint16_t gear4_adc;
 
-	//const uint16_t _G_MAP[10];
-
-	uint16_t _US_ACTUATOR_DELAY; //previous 20
-	uint16_t _US_FINISH_TIMEOUT;
-
-	uint16_t _DS_ACTUATOR_DELAY;    // previous value = 40
-	//static const uint16_t _DS_PARTIAL_TIMEOUT = 200;
-	uint16_t _DS_FINISH_TIMEOUT;  // 250
-
-	uint16_t _OL_US_GEARCUT_DELAY;
-	uint16_t _OL_DS_CLUTCH_DELAY;
-
 	GearboxState_t _state;
 
 	uint8_t  actual_gear;
@@ -59,6 +53,9 @@ typedef struct
 	uint8_t start_gear;
 
 	uint8_t gear_cut;
+
+	uint32_t upshiftTime;
+	uint32_t downshiftTime;
 
 }Gearbox_t;
 
@@ -89,6 +86,7 @@ typedef struct
 	void startUpshift(Gearbox_t* gearbox);
 	void startDownshift(Gearbox_t* gearbox);
 
+	void gearshiftTime(Gearbox_t* gearbox);
 
 //	void openLoopUpshift(void);
 //	void openLoopDownshift(void);
