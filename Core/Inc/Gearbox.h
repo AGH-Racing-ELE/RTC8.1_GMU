@@ -11,6 +11,13 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#define US_ACTUATOR_DELAY 20
+#define US_FINISH_TIMEOUT 200
+#define DS_ACTUATOR_DELAY 40
+#define DS_FINISH_TIMEOUT 250
+#define OL_US_GEARCUT_DEALAY 100
+#define OL_DS_CLUTCH_DELAY 100
+
 typedef enum
 {
 	Idle,
@@ -36,13 +43,6 @@ typedef struct
 	uint16_t gear2_adc;
 	uint16_t gear3_adc;
 	uint16_t gear4_adc;
-
-	uint32_t US_ACTUATOR_DELAY;
-	uint32_t US_FINISH_TIMEOUT;
-	uint32_t DS_ACTUATOR_DELAY;
-	uint32_t DS_FINISH_TIMEOUT;
-	uint32_t OL_US_GEARCUT_DEALAY;
-	uint32_t OL_DS_CLUTCH_DELAY;
 
 	GearboxState_t _state;
 

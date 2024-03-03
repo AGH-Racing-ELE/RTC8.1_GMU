@@ -15,7 +15,6 @@ void AppInit(void)
 	gearboxInit(&gearbox);
 	ADC_Init();
 	CAN_Handler_Init();
-
 }
 
 void canRxProcess()
@@ -62,7 +61,6 @@ void AppProcess(void)
 {
 	uint32_t CANRXtick = HAL_GetTick();
 	uint32_t CANSendFrameTick = HAL_GetTick();
-	uint32_t StatusLEDTick = HAL_GetTick();
 
 	while(1)
 	{
@@ -79,11 +77,6 @@ void AppProcess(void)
 		{
 			sendCANFrame();
 			CANSendFrameTick = HAL_GetTick();
-		}
-		if((HAL_GetTick() - StatusLEDTick) > 1000)
-		{
-			statusLED();
-			StatusLEDTick = HAL_GetTick();
 		}
 	}
 }

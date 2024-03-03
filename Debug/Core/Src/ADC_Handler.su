@@ -1,3 +1,2 @@
-../Core/Src/ADC_Handler.c:12:6:ADC_Init	8	static
-../Core/Src/ADC_Handler.c:18:6:HAL_ADC_ConvCpltCallback	16	static
-../Core/Src/ADC_Handler.c:26:10:getADCValue	4	static
+../Core/Src/ADC_Handler.c:13:6:ADC_Init	8	static
+../Core/Src/ADC_Handler.c:20:10:getADCValue	16	static
