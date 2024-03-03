@@ -10,13 +10,15 @@
 
 static bool getTimeout(uint32_t dupa, uint32_t anus);
 
+uint32_t cipa;
+
 void gearboxInit(Gearbox_t* gearbox)
 {
-	gearbox->neutral_adc = 100;
-	gearbox->gear1_adc = 1500;
-	gearbox->gear2_adc = 1800;
-	gearbox->gear3_adc = 2200;
-	gearbox->gear4_adc = 2800;
+	gearbox->neutral_adc = 500;
+	gearbox->gear1_adc = 0;
+	gearbox->gear2_adc = 1470;
+	gearbox->gear3_adc = 1870;
+	gearbox->gear4_adc = 2300;
 
 	gearbox->_state = Idle;
 
@@ -37,32 +39,27 @@ void updateGear(Gearbox_t* gearbox)
 	{
 		gearbox->actual_gear = 0;
 	}
-	if((gearbox->gearPosADC>=(gearbox->gear1_adc-150))&&(gearbox->gearPosADC<=(gearbox->gear1_adc+150)))
+	else if((gearbox->gearPosADC>=(gearbox->gear1_adc-150))&&(gearbox->gearPosADC<=(gearbox->gear1_adc+150)))
 	{
 		gearbox->actual_gear = 1;
 	}
-	if((gearbox->gearPosADC>=(gearbox->gear2_adc-150))&&(gearbox->gearPosADC<=(gearbox->gear2_adc+150)))
+	else if((gearbox->gearPosADC>=(gearbox->gear2_adc-150))&&(gearbox->gearPosADC<=(gearbox->gear2_adc+150)))
 	{
 		gearbox->actual_gear = 2;
 	}
-	if((gearbox->gearPosADC>=(gearbox->gear3_adc-150))&&(gearbox->gearPosADC<=(gearbox->gear3_adc+150)))
+	else if((gearbox->gearPosADC>=(gearbox->gear3_adc-150))&&(gearbox->gearPosADC<=(gearbox->gear3_adc+150)))
 		{
 			gearbox->actual_gear = 3;
 		}
-	if((gearbox->gearPosADC>=(gearbox->gear4_adc-150))&&(gearbox->gearPosADC<=(gearbox->gear4_adc+150)))
+	else if((gearbox->gearPosADC>=(gearbox->gear4_adc-150))&&(gearbox->gearPosADC<=(gearbox->gear4_adc+150)))
 		{
 			gearbox->actual_gear = 4;
 		}
-}
+	else
+		{
+			gearbox->actual_gear = 0xff;
+		}
 
-uint8_t getGear(Gearbox_t* gearbox)
-{
-	return gearbox->actual_gear;
-}
-
-uint8_t getGearCut(Gearbox_t* gearbox)
-{
-	return gearbox->gear_cut;
 }
 
 void processCallback(Gearbox_t* gearbox)
@@ -157,9 +154,10 @@ void startUpshiftCallback(Gearbox_t* gearbox)
 }
 void upshiftFromNeutral(Gearbox_t* gearbox)
 {
-	if((gearbox->actual_gear == 1) || (getTimeout(gearbox->timestamp_tick,US_FINISH_TIMEOUT)))
+	if((gearbox->actual_gear == 1) || (getTimeout(gearbox->timestamp_tick, US_FINISH_TIMEOUT)))
 	{
-		HAL_GPIO_WritePin(GEAR_UP_GPIO_Port, GEAR_DOWN_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GEAR_UP_GPIO_Port, GEAR_UP_Pin, GPIO_PIN_RESET);
+		gearbox->timestamp_tick = HAL_GetTick();
 		gearbox->_state = Idle;
 	}
 }
@@ -182,6 +180,7 @@ void upshiftFinish(Gearbox_t* gearbox)
 		HAL_GPIO_WritePin(GEAR_CUT_GPIO_Port, GEAR_CUT_Pin, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GEAR_UP_GPIO_Port, GEAR_UP_Pin, GPIO_PIN_RESET);
 		gearbox->gear_cut = 127;
+		gearbox->timestamp_tick = HAL_GetTick();
 		gearbox->upshiftTime = (gearbox->timestamp_tick - gearbox->shift_start_tick);
 		gearbox->_state = Idle;
 	}
@@ -191,7 +190,6 @@ void startDownshiftCallback(Gearbox_t* gearbox)
 {
 	gearbox->shift_start_tick = HAL_GetTick();
 	gearbox->start_gear = gearbox->actual_gear;
-	//pobranie wartosci z adc
 
 	if(gearbox->start_gear > 4)
 	{
@@ -225,6 +223,7 @@ void downshiftToNeutral(Gearbox_t* gearbox)
 	{
 		HAL_GPIO_WritePin(GEAR_DOWN_GPIO_Port, GEAR_DOWN_Pin, GPIO_PIN_SET);
 		gearbox->timestamp_tick = HAL_GetTick();
+		gearbox->downshiftTime = (gearbox->timestamp_tick - gearbox->shift_start_tick);
 		gearbox->_state = DownshiftFinish;
 	}
 }
@@ -242,11 +241,12 @@ void downshiftRevMatch(Gearbox_t* gearbox)
 
 void downshiftFinish(Gearbox_t* gearbox)
 {
-	if((gearbox->actual_gear == gearbox->start_gear -1 )|| (getTimeout(gearbox->timestamp_tick, DS_FINISH_TIMEOUT)))
+	if((gearbox->actual_gear == gearbox->start_gear -1 ) || (getTimeout(gearbox->timestamp_tick, DS_FINISH_TIMEOUT)))
 	{
 		HAL_GPIO_WritePin(CLUTCH_GPIO_Port, CLUTCH_Pin, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GEAR_DOWN_GPIO_Port, GEAR_DOWN_Pin, GPIO_PIN_RESET);
 		gearbox->gear_cut = 127;
+		gearbox->timestamp_tick = HAL_GetTick();
 		gearbox->downshiftTime = (gearbox->timestamp_tick - gearbox->shift_start_tick);
 		gearbox->_state = Idle;
 	}
@@ -270,6 +270,7 @@ void openLoop_upshift_finish(Gearbox_t* gearbox)
 		HAL_GPIO_WritePin(GEAR_CUT_GPIO_Port, GEAR_CUT_Pin, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GEAR_UP_GPIO_Port, GEAR_UP_Pin, GPIO_PIN_RESET);
 		gearbox->gear_cut = 127;
+		gearbox->timestamp_tick = HAL_GetTick();
 		gearbox->upshiftTime = (gearbox->timestamp_tick - gearbox->shift_start_tick);
 		gearbox->_state = Idle;
 	}
@@ -293,6 +294,7 @@ void openLoop_downshift_finish(Gearbox_t* gearbox)
 		HAL_GPIO_WritePin(CLUTCH_GPIO_Port, CLUTCH_Pin, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GEAR_DOWN_GPIO_Port, GEAR_DOWN_Pin, GPIO_PIN_RESET);
 		gearbox->gear_cut = 127;
+		gearbox->timestamp_tick = HAL_GetTick();
 		gearbox->downshiftTime = (gearbox->timestamp_tick - gearbox->shift_start_tick);
 		gearbox->_state = Idle;
 	}
@@ -322,14 +324,9 @@ bool isShiftinProgress(Gearbox_t*gearbox)
 		return false;
 }
 
-GearboxState_t getState(Gearbox_t* gearbox)
+bool getTimeout(uint32_t actual_time, uint32_t maximum_waiting_time)
 {
-	return gearbox->_state;
-}
-
-static bool getTimeout(uint32_t dupa, uint32_t anus)
-{
-	if((HAL_GetTick() - dupa) > anus)
+	if((HAL_GetTick() - actual_time) >= maximum_waiting_time)
 	{
 		return true;
 	}
