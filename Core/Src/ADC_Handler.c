@@ -20,9 +20,9 @@ void ADC_Init(void)
 uint16_t getADCValue(void)
 {
 	uint32_t adcValueTmp = 0;
-	for(uint8_t i = 0; i>=10; i++)
+	for(uint8_t i = 0; i<=10; i++)
 	{
 		adcValueTmp += adcValue[i];
 	}
-	return adcValueMean = adcValueTmp / 10;
+	return adcValueMean = (adcValueTmp / 10);
 }
